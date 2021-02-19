@@ -23,11 +23,15 @@ export default class ToDoController {
         document.getElementById("redo-button").onmousedown = function() {
             appModel.redo();
         }
-        document.getElementById("delete-list-button").onmousedown = function() {
-            appModel.removeCurrentList();
+        document.getElementById("delete-list-button").onmousedown = function(eventData) {
+            if (eventData.button == 0) {
+                appModel.removeCurrentList();
+            }
         }
-        document.getElementById("add-item-button").onmousedown = function() {
-            appModel.addNewItemTransaction();
+        document.getElementById("add-item-button").onmousedown = function(eventData) {
+            if (eventData.button == 0){
+                appModel.addNewItemTransaction();
+            }
         }  
     }
     

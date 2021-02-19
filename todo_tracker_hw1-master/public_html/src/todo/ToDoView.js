@@ -38,6 +38,19 @@ export default class ToDoView {
         }
     }
 
+    // WHEN PRESSING TRASH LIST, PROMPTS A CONFIRMATION BOX
+    deleteListConfirmation() {
+        let shouldCancel = false;
+        if (confirm("Delete List?")){
+            shouldCancel = true;
+        }
+        return shouldCancel;
+    }
+
+    disableListControlsCol() {
+        let controls = document.getElementById("")
+    }
+
     // REFRESHES ALL THE LISTS IN THE LEFT SIDEBAR
     refreshLists(lists) {
         // GET THE UI CONTROL WE WILL APPEND IT TO
