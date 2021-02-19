@@ -104,6 +104,17 @@ export default class ToDoModel {
     }
 
     /**
+     * Gets the index of list with listID in toDoLists
+     */
+    getListPosition(listId){
+        let listIndex = -1;
+        for (let i = 0; (i < this.toDoLists.length) && (listIndex < 0); i++) {
+            if (this.toDoLists[i].id === listId)
+                listIndex = i;
+        }
+    }
+
+    /**
      * Makes a new list item with the provided data and adds it to the list.
      */
     loadItemIntoList(list, description, due_date, assigned_to, completed) {
@@ -128,7 +139,21 @@ export default class ToDoModel {
             let listToLoad = this.toDoLists[listIndex];
             this.currentList = listToLoad;
             this.view.viewList(this.currentList);
+
+            this.moveListIndexToFront(listIndex);
+            this.view.refreshLists;
         }
+    }
+
+    /**
+     * Moves list with listIndex to the front of toDoList
+     */
+    moveListIndexToFront(listIndex) {
+        for (let i = listId; i > 0; i--) {
+            this.toDoLists[i] = this.toDoLists[i-1];
+        }
+
+        this.toDoLists[0] = this.currentList;       
     }
 
     /**
