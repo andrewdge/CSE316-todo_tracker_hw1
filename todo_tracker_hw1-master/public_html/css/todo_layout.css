@@ -24,7 +24,7 @@
 }
 
 #left-sidebar-header-text {
-
+    position: static;
 }
 
 #left-sidebar-controls {
