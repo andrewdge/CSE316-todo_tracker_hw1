@@ -149,7 +149,7 @@ export default class ToDoModel {
      * Moves list with listIndex to the front of toDoList
      */
     moveListIndexToFront(listIndex) {
-        for (let i = listId; i > 0; i--) {
+        for (let i = listIndex; i > 0; i--) {
             this.toDoLists[i] = this.toDoLists[i-1];
         }
 
