@@ -9,9 +9,13 @@
 export default class ToDoController {    
     constructor() {}
 
+    
+
     setModel(initModel) {
         this.model = initModel;
         let appModel = this.model;
+        
+        let canUseListControls = false;
 
         // SETUP ALL THE EVENT HANDLERS SINCE THEY USE THE MODEL
         document.getElementById("add-list-button").onclick = function() {
@@ -23,38 +27,40 @@ export default class ToDoController {
         document.getElementById("redo-button").onclick = function() {
             appModel.redo();
         }
-        document.getElementById("delete-list-button").onclick = function() {
-            appModel.removeCurrentList();
-        }
-        document.getElementById("add-item-button").onclick = function() {
-            appModel.addNewItemTransaction();
-        }  
-        // document.getElementById("todo-list-items-div").onclick = function() {
-        //     //appModel.makeTextEditable(this);
-        //     console.log(this.children);
-        // }
 
-        var b = document.getElementById("todo-list-items-div");
-        
-
-        var c = document.querySelectorAll(".task-col");
-        console.log(c);
-
-        for (let i = 0; i < c.length; i++){
-            c[i].index = i;
-
-            c[i].onclick = function() {
-                console.log(this.index);
+        document.getElementById("todo-lists-list").onmousedown = function(eventData){
+            if (eventData.button == 0) {
+                canUseListControls = true;
+                document.getElementById("close-list-button").style.color = "white";
+                document.getElementById("delete-list-button").style.color = "white";
+                document.getElementById("add-item-button").style.color = "white";
             }
         }
 
-        var a = document.getElementsByClassName("task-col");
-        for (let i = 0; i < a.length; i++) {
-            a[i].onclick = function() {
-                console.log(a[i]);
+        document.getElementById("add-item-button").onmousedown = function(eventData) {
+            if (canUseListControls){
+                if (eventData.button == 0){
+                    appModel.addNewItemTransaction();
+                }
             }
-            
         }
+        document.getElementById("delete-list-button").onmousedown = function(eventData) {
+            if (canUseListControls){
+                if (eventData.button == 0) {
+                    appModel.removeCurrentList();
+                }
+            }
+        }
+        document.getElementById("close-list-button").onmousedown = function(eventData) {
+            if (eventData.button == 0){
+                document.getElementById("close-list-button").style.color = "grey";
+                document.getElementById("delete-list-button").style.color = "grey";
+                document.getElementById("add-item-button").style.color = "grey";
+                canUseListControls = false;
+                appModel.unviewListModel();
+            }
+        }
+
     }
     
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD

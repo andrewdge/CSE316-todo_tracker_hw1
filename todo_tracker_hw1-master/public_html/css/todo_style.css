@@ -69,3 +69,7 @@
 .todo_button:hover {
     background-color: var(--swatch-contrast);
 }
+
+.list-item-control {
+    color: grey;
+}
