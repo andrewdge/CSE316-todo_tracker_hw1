@@ -114,6 +114,10 @@ export default class ToDoModel {
         }
     }
 
+    getCurrentList(){
+        return this.currentList;
+    }
+
     /**
      * Makes a new list item with the provided data and adds it to the list.
      */
@@ -145,6 +149,10 @@ export default class ToDoModel {
         }
     }
 
+    makeTextEditable(){
+        this.view.makeTextField();
+    }
+
     /**
      * Moves list with listIndex to the front of toDoList
      */
@@ -152,7 +160,6 @@ export default class ToDoModel {
         for (let i = listIndex; i > 0; i--) {
             this.toDoLists[i] = this.toDoLists[i-1];
         }
-
         this.toDoLists[0] = this.currentList;       
     }
 

@@ -47,9 +47,6 @@ export default class ToDoView {
         return shouldCancel;
     }
 
-    disableListControlsCol() {
-        let controls = document.getElementById("")
-    }
 
     // REFRESHES ALL THE LISTS IN THE LEFT SIDEBAR
     refreshLists(lists) {
