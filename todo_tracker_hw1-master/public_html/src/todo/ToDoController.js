@@ -33,6 +33,9 @@ export default class ToDoController {
                 appModel.addNewItemTransaction();
             }
         }  
+        document.getElementsByClassName("task-col").onmousedown = function() {
+            console.log("hello");
+        }
     }
     
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD
