@@ -25,6 +25,7 @@ export default class ToDoView {
         let thisController = this.controller;
         listElement.onmousedown = function() {
             thisController.handleLoadList(newList.id);
+            thisController.canUseListControls = true;
         }
     }
 
@@ -89,7 +90,7 @@ export default class ToDoView {
         }
     }
 
-    // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES
+    // THE VIEW NEEDS THE CONTROLLER TO PROVIDE PROPER RESPONSES 
     setController(initController) {
         this.controller = initController;
     }

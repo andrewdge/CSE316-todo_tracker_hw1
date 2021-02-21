@@ -204,4 +204,9 @@ export default class ToDoModel {
             this.tps.undoTransaction();
         }
     } 
+
+    unviewListModel(){
+        this.currentList = null;
+        this.view.viewList(this.currentList);
+    }
 }
