@@ -60,12 +60,6 @@ export default class ToDoController {
                 appModel.unviewListModel();
             }
         }
-        document.getElementsByClassName("task-col").onmousedown = function(eventData) {
-            console.log("hello");
-            if (eventData.button == 0){
-                console.log("hi");
-            }
-        }
 
     }
     
