@@ -205,6 +205,9 @@ export default class ToDoModel {
         }
     } 
 
+    /**
+     * Removes currently selected list from the view
+     */
     unviewListModel(){
         this.currentList = null;
         this.view.viewList(this.currentList);

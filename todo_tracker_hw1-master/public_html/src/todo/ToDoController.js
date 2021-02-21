@@ -16,7 +16,6 @@ export default class ToDoController {
         let appModel = this.model;
         
         let canUseListControls = false;
-        console.log(canUseListControls);
 
         // SETUP ALL THE EVENT HANDLERS SINCE THEY USE THE MODEL
         document.getElementById("add-list-button").onmousedown = function() {
@@ -53,7 +52,6 @@ export default class ToDoController {
             }
         }
         document.getElementById("close-list-button").onmousedown = function(eventData) {
-
             if (eventData.button == 0){
                 document.getElementById("close-list-button").style.color = "grey";
                 document.getElementById("delete-list-button").style.color = "grey";
@@ -61,11 +59,14 @@ export default class ToDoController {
                 canUseListControls = false;
                 appModel.unviewListModel();
             }
-
-            
-            // if (canUseListControls){
-            //     
         }
+        document.getElementsByClassName("task-col").onmousedown = function(eventData) {
+            console.log("hello");
+            if (eventData.button == 0){
+                console.log("hi");
+            }
+        }
+
     }
     
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD
