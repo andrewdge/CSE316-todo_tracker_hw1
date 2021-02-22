@@ -82,6 +82,8 @@ export default class ToDoView {
         }
     }
 
+    //TODO: create an event listener for each item in listItemElement so when it is clicked I can do something.
+
     // LOADS THE list ARGUMENT'S ITEMS INTO THE VIEW
     viewList(list) {
         // WE'LL BE ADDING THE LIST ITEMS TO OUR WORKSPACE
@@ -94,7 +96,7 @@ export default class ToDoView {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col' contenteditable='true'>" + listItem.description + "</div>"
+                                + "<div class='task-col'>" + listItem.description + "</div>"
                                 + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
                                 + "<div class='list-controls-col'>"
@@ -104,7 +106,7 @@ export default class ToDoView {
                                 + " <div class='list-item-control'></div>"
                                 + " <div class='list-item-control'></div>"
                                 + "</div>";
-            itemsListDiv.innerHTML += listItemElement;
+            itemsListDiv.insertAdjacentHTML("beforeend", listItemElement);
         }
     }
 

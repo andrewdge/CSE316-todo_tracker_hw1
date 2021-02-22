@@ -149,11 +149,6 @@ export default class ToDoModel {
         }
     }
 
-    //TODO:
-    makeTextEditable(){
-        this.view.makeTextField();
-    }
-
     /**
      * Moves list with listIndex to the front of toDoList
      */
