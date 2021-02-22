@@ -47,9 +47,7 @@ export default class ToDoController {
             if (canUseListControls){
                 if (eventData.button == 0) {
                     appModel.showConfirmationBox();
-                    
                     document.getElementById("yesBtn").onclick = function() {
-                        
                         document.getElementsByClassName("modal-overlay")[0].style.display = "none";
                         appModel.removeCurrentList();
                         document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
@@ -70,15 +68,6 @@ export default class ToDoController {
                 appModel.unviewListModel();
             }
         }
-        
-
-        // let tasks = document.getElementsByClassName("task-col");
-        // for (let i = 0; i < tasks.length; i++) {
-        //     tasks[i].addEventListener("input", function() {
-        //         console.log(tasks[i]);
-        //     }, false);
-        // }
-
     }
     
     // PROVIDES THE RESPONSE TO WHEN A USER CLICKS ON A LIST TO LOAD
