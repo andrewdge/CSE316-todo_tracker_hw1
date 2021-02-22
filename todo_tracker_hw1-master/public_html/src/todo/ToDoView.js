@@ -39,13 +39,34 @@ export default class ToDoView {
         }
     }
 
-    // WHEN PRESSING TRASH LIST, PROMPTS A CONFIRMATION BOX
-    deleteListConfirmation() {
-        let shouldCancel = false;
-        if (confirm("Delete List?")){
-            shouldCancel = true;
-        }
-        return shouldCancel;
+    generateConfirmationBox(){
+        let modalOverlay = document.getElementById("grid-container").appendChild(document.createElement("div"));
+        modalOverlay.setAttribute("class", "modal-overlay");
+        modalOverlay.style.display = "block";
+
+        let modal = modalOverlay.appendChild(document.createElement("div"));
+        modal.setAttribute("class", "modal");
+       
+        let modalHeader = modal.appendChild(document.createElement("div"));
+        modalHeader.setAttribute("class", "modal-header");
+        modalHeader.style.display = "flex";
+        modalHeader.style.alignContent = "center";
+        modalHeader.style.justifyContent = "center";
+        let modalText = modalHeader.appendChild(document.createElement("p"))
+        modalText.textContent = "Delete List?";
+
+        let header2 = modal.appendChild(document.createElement("div"));
+        header2.setAttribute("class", "modal-header");
+
+        let yesBtn = header2.appendChild(document.createElement("button"));
+        yesBtn.textContent = "Yes";
+        yesBtn.id = "yesBtn";
+        yesBtn.setAttribute("class", "modal-button");
+
+        let noBtn = header2.appendChild(document.createElement("button"));
+        noBtn.textContent = "No";
+        noBtn.id = "noBtn";
+        noBtn.setAttribute("class", "modal-button");
     }
 
 
@@ -73,7 +94,7 @@ export default class ToDoView {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
             let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col'>" + listItem.description + "</div>"
+                                + "<div class='task-col' contenteditable='true'>" + listItem.description + "</div>"
                                 + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
                                 + "<div class='status-col'>" + listItem.status + "</div>"
                                 + "<div class='list-controls-col'>"

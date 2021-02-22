@@ -36,7 +36,6 @@ export default class ToDoController {
                 document.getElementById("add-item-button").style.color = "white";
             }
         }
-
         document.getElementById("add-item-button").onmousedown = function(eventData) {
             if (canUseListControls){
                 if (eventData.button == 0){
@@ -47,7 +46,18 @@ export default class ToDoController {
         document.getElementById("delete-list-button").onmousedown = function(eventData) {
             if (canUseListControls){
                 if (eventData.button == 0) {
-                    appModel.removeCurrentList();
+                    appModel.showConfirmationBox();
+                    
+                    document.getElementById("yesBtn").onclick = function() {
+                        
+                        document.getElementsByClassName("modal-overlay")[0].style.display = "none";
+                        appModel.removeCurrentList();
+                        document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
+                    }
+                    noBtn.onclick = function() {
+                        document.getElementsByClassName("modal-overlay")[0].style.display = "none";
+                        document.getElementById("grid-container").removeChild(document.getElementsByClassName("modal-overlay")[0]);
+                    } 
                 }
             }
         }
@@ -60,6 +70,14 @@ export default class ToDoController {
                 appModel.unviewListModel();
             }
         }
+        
+
+        // let tasks = document.getElementsByClassName("task-col");
+        // for (let i = 0; i < tasks.length; i++) {
+        //     tasks[i].addEventListener("input", function() {
+        //         console.log(tasks[i]);
+        //     }, false);
+        // }
 
     }
     
