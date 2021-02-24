@@ -139,11 +139,8 @@ export default class ToDoView {
                 textInput.id = "task-input";
                 textInput.size = "30";
                 textInput.value = task.innerText;
-
                 task.parentNode.replaceChild(textInput, task);
-
                 textInput.focus();
-    
                 textInput.onblur = function() {
                     thisController.handleTaskUpdate(listItem.id, textInput.value);
                 }
@@ -155,10 +152,8 @@ export default class ToDoView {
                 dateInput.type = "date";
                 dateInput.size = "30";
                 dateInput.value = dateInput.innerText;
-
                 dueDate.parentElement.replaceChild(dateInput, dueDate);
                 dateInput.focus();
-
                 dateInput.onblur = function() {
                     thisController.handleDateUpdate(listItem.id, dateInput.value);
                 }
