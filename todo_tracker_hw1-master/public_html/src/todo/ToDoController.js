@@ -82,4 +82,20 @@ export default class ToDoController {
     handleDateUpdate(itemId, newDate) {
         this.model.editDate(itemId, newDate);
     }
+
+    handleStatusUpdate(itemId, newChoice){
+        this.model.editStatus(itemId, newChoice);
+    }
+
+    handleShift(itemId, direction){
+        if (direction === "up"){
+            this.model.shiftItemUp(itemId);
+        } else {
+            this.model.shiftItemDown(itemId);
+        }
+    }
+
+    handleClose(item){
+        this.model.removeItem(item);
+    }
 }

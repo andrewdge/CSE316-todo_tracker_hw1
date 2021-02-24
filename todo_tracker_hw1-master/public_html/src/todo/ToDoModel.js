@@ -130,6 +130,19 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
     }
 
+    editStatus(itemId, newStatus){
+        let itemIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length) && (itemIndex < 0); i++){
+            if (this.currentList.items[i].id === itemId)
+                itemIndex = i;
+        }
+        if (itemIndex >= 0){
+            this.currentList.items[itemIndex].setStatus(newStatus);
+        }
+        this.view.refreshLists(this.toDoLists);
+        this.view.viewList(this.currentList);
+    }
+
     /**
      * Gets the index of list with listID in toDoLists
      */
@@ -223,6 +236,36 @@ export default class ToDoModel {
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
     setView(initView) {
         this.view = initView;
+    }
+
+    shiftItemUp(itemId) {
+        let itemIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length) && (itemIndex < 0); i++){
+            if (this.currentList.items[i].id === itemId)
+                itemIndex = i;
+        }
+        if (itemIndex >= 1) {
+            let tmp = this.currentList.items[itemIndex - 1];
+            this.currentList.items[itemIndex - 1] = this.currentList.items[itemIndex];
+            this.currentList.items[itemIndex] = tmp;
+        }
+        this.view.refreshLists(this.toDoLists);
+        this.view.viewList(this.currentList);
+    }
+
+    shiftItemDown(itemId) {
+        let itemIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length) && (itemIndex < 0); i++){
+            if (this.currentList.items[i].id === itemId)
+                itemIndex = i;
+        }
+        if (itemIndex >= 0 && itemIndex < this.currentList.items.length - 1) {
+            let tmp = this.currentList.items[itemIndex + 1];
+            this.currentList.items[itemIndex + 1] = this.currentList.items[itemIndex];
+            this.currentList.items[itemIndex] = tmp;
+        }
+        this.view.refreshLists(this.toDoLists);
+        this.view.viewList(this.currentList);
     }
 
 

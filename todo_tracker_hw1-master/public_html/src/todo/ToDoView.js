@@ -111,6 +111,11 @@ export default class ToDoView {
             let statusCol = element.appendChild(document.createElement("div"));
             statusCol.className = "status-col";
             statusCol.innerText = listItem.status;
+            if (listItem.status === "complete"){
+                statusCol.className += " complete-status"
+            } else {
+                statusCol.className += " incomplete-status";
+            }
 
             let listControls = element.appendChild(document.createElement("div"));
             listControls.className = "list-controls-col";
@@ -118,14 +123,25 @@ export default class ToDoView {
             let keyUpArrow = listControls.appendChild(document.createElement("div"));
             keyUpArrow.className = "list-item-control material-icons";
             keyUpArrow.innerText = "keyboard_arrow_up";
+            if (i === 0){
+                keyUpArrow.id = "arrow-disabled";
+            } else {
+                keyUpArrow.id = "arrow-enabled";
+            }
 
             let keyDownArrow = listControls.appendChild(document.createElement("div"));
             keyDownArrow.className = "list-item-control material-icons";
             keyDownArrow.innerText = "keyboard_arrow_down";
+            if (i === list.items.length-1){
+                keyDownArrow.id = "arrow-disabled";
+            } else {
+                keyDownArrow.id = "arrow-enabled";
+            }
 
             let close = listControls.appendChild(document.createElement("div"));
             close.className = "list-item-control material-icons";
             close.innerText = "close";
+            close.id = "close";
 
             let e1 = listControls.appendChild(document.createElement("div"));
             e1.className = "list-item-control";
@@ -145,7 +161,6 @@ export default class ToDoView {
                     thisController.handleTaskUpdate(listItem.id, textInput.value);
                 }
             }
-
             dueDate.onclick = function() {
                 let dateInput = document.createElement("input");
                 dateInput.id = "date-input";
@@ -158,7 +173,35 @@ export default class ToDoView {
                     thisController.handleDateUpdate(listItem.id, dateInput.value);
                 }
             }
-
+            statusCol.onclick = function() {
+                let statusInput = document.createElement("select");
+                statusInput.id = "status-input";
+                let op1 = statusInput.appendChild(document.createElement("option"));
+                op1.value = "complete";
+                op1.innerText = "complete";
+                let op2 = statusInput.appendChild(document.createElement("option"));
+                op2.value = "incomplete";
+                op2.innerText = "incomplete";
+                statusInput.value = statusCol.innerText;
+                statusCol.parentNode.replaceChild(statusInput, statusCol);
+                statusInput.focus();
+                statusInput.onblur = function() {
+                    thisController.handleStatusUpdate(listItem.id, statusInput.value);
+                }
+            }
+            keyUpArrow.onclick = function() {
+                if (keyUpArrow.id !== "arrow-disabled"){
+                    thisController.handleShift(listItem.id, "up");
+                }
+            }
+            keyDownArrow.onclick = function() {
+                if (keyDownArrow.id !== "arrow-disabled"){
+                    thisController.handleShift(listItem.id, "down");
+                }
+            }
+            close.onclick = function() {
+                thisController.handleClose(listItem);
+            }
             
         }
     }

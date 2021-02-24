@@ -25,6 +25,7 @@
     background-color: var(--swatch-primary);
 }
 
+
 #navbar {
     box-shadow: 2px 2px 2px var(--swatch-primary); 
 }
@@ -32,6 +33,32 @@
 #left-sidebar {
     background-color: var(--swatch-complement);
     color: rgb(233,237,240);
+}
+
+#arrow-disabled {
+    color : rgb(87, 93, 105);
+    cursor: default;
+    text-align: center;
+}
+
+#arrow-enabled{
+    color: rgb(233,237,240);
+    cursor: pointer;
+    text-align: center;
+}
+
+#arrow-enabled:hover{
+    background-color: var(--swatch-complement);
+}
+
+#close {
+    color: rgb(233,237,240);
+    cursor: pointer;
+    text-align: center;
+}
+
+#close:hover {
+    background-color: var(--swatch-complement);
 }
 
 #workspace {
@@ -61,6 +88,22 @@
 #date-input {
     background-color: rgb(87, 93, 105);
     color: #e9edf0;
+}
+
+#status-input {
+    font-family: Consolas;
+    font-size: 14px;
+    border: none;
+    background-color: rgb(87,93, 105);
+    color: #e9edf0;
+}
+
+.complete-status{
+    color: #8ed4f8;
+}
+
+.incomplete-status {
+    color: #f5bc75;
 }
 
 .list-header-card {
