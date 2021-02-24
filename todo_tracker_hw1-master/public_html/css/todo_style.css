@@ -58,6 +58,11 @@
     color: #e9edf0;
 }
 
+#date-input {
+    background-color: rgb(87, 93, 105);
+    color: #e9edf0;
+}
+
 .list-header-card {
     border-bottom: dotted;
 }
