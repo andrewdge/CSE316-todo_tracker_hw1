@@ -82,12 +82,12 @@ export default class ToDoView {
         }
     }
 
-    //TODO: create an event listener for each item in listItemElement so when it is clicked I can do something.
-
     // LOADS THE list ARGUMENT'S ITEMS INTO THE VIEW
     viewList(list) {
         // WE'LL BE ADDING THE LIST ITEMS TO OUR WORKSPACE
         let itemsListDiv = document.getElementById("todo-list-items-div");
+
+        let thisController = this.controller;
 
         // GET RID OF ALL THE ITEMS
         this.clearItemsList();
@@ -95,18 +95,62 @@ export default class ToDoView {
         for (let i = 0; i < list.items.length; i++) {
             // NOW BUILD ALL THE LIST ITEMS
             let listItem = list.items[i];
-            let listItemElement = "<div id='todo-list-item-" + listItem.id + "' class='list-item-card'>"
-                                + "<div class='task-col'>" + listItem.description + "</div>"
-                                + "<div class='due-date-col'>" + listItem.dueDate + "</div>"
-                                + "<div class='status-col'>" + listItem.status + "</div>"
-                                + "<div class='list-controls-col'>"
-                                + " <div class='list-item-control material-icons'>keyboard_arrow_up</div>"
-                                + " <div class='list-item-control material-icons'>keyboard_arrow_down</div>"
-                                + " <div class='list-item-control material-icons'>close</div>"
-                                + " <div class='list-item-control'></div>"
-                                + " <div class='list-item-control'></div>"
-                                + "</div>";
-            itemsListDiv.insertAdjacentHTML("beforeend", listItemElement);
+
+            let element = document.createElement("div");
+            element.id = "todo-list-item-" + listItem.id;
+            element.className = "list-item-card";
+
+            let task = element.appendChild(document.createElement("div"));
+            task.className = "task-col";
+            task.innerText = listItem.description;
+
+            let dueDate = element.appendChild(document.createElement("div"));
+            dueDate.className = "due-date-col";
+            dueDate.innerText = listItem.dueDate;
+
+            let statusCol = element.appendChild(document.createElement("div"));
+            statusCol.className = "status-col";
+            statusCol.innerText = listItem.status;
+
+            let listControls = element.appendChild(document.createElement("div"));
+            listControls.className = "list-controls-col";
+
+            let keyUpArrow = listControls.appendChild(document.createElement("div"));
+            keyUpArrow.className = "list-item-control material-icons";
+            keyUpArrow.innerText = "keyboard_arrow_up";
+
+            let keyDownArrow = listControls.appendChild(document.createElement("div"));
+            keyDownArrow.className = "list-item-control material-icons";
+            keyDownArrow.innerText = "keyboard_arrow_down";
+
+            let close = listControls.appendChild(document.createElement("div"));
+            close.className = "list-item-control material-icons";
+            close.innerText = "close";
+
+            let e1 = listControls.appendChild(document.createElement("div"));
+            e1.className = "list-item-control";
+            let e2 = listControls.appendChild(document.createElement("div"));
+            e2.className = "list-item-control";
+
+            itemsListDiv.appendChild(element);
+            
+            task.onclick = function() {
+                
+                let textInput = document.createElement("input");
+                textInput.id = "task-input";
+                textInput.size = "30";
+                textInput.value = task.innerText;
+
+                task.parentNode.replaceChild(textInput, task);
+
+                textInput.focus();
+    
+                textInput.onblur = function() {
+                    thisController.handleTaskUpdate(listItem.id, textInput.value);
+                }
+            }
+
+            
         }
     }
 

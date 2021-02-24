@@ -103,6 +103,22 @@ export default class ToDoModel {
         return newItem;
     }
 
+    editTask(itemId, newText){
+        let itemIndex = -1;
+        for (let i = 0; (i < this.currentList.items.length) && (itemIndex < 0); i++){
+            if (this.currentList.items[i].id === itemId)
+                itemIndex = i;
+        }
+
+        if (itemIndex >= 0){
+            this.currentList.items[itemIndex].description = newText;
+        }
+
+        this.view.refreshLists(this.toDoLists);
+        this.view.viewList(this.currentList);
+    
+    }
+
     /**
      * Gets the index of list with listID in toDoLists
      */

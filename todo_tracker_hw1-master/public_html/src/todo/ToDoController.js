@@ -27,7 +27,6 @@ export default class ToDoController {
         document.getElementById("redo-button").onclick = function() {
             appModel.redo();
         }
-
         document.getElementById("todo-lists-list").onmousedown = function(eventData){
             if (eventData.button == 0) {
                 canUseListControls = true;
@@ -74,5 +73,9 @@ export default class ToDoController {
     handleLoadList(listId) {
         // UNLOAD THE CURRENT LIST AND INSTEAD LOAD THE CURRENT LIST
         this.model.loadList(listId);
+    }
+
+    handleTaskUpdate(itemId, newText){
+        this.model.editTask(itemId, newText);
     }
 }

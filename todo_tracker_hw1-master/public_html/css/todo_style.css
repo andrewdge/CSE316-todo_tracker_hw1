@@ -53,6 +53,11 @@
     border-bottom: dotted;
 }
 
+#task-input {
+    background-color: rgb(87, 93, 105);
+    color: #e9edf0;
+}
+
 .list-header-card {
     border-bottom: dotted;
 }
@@ -97,4 +102,5 @@
 .modal-header {
     color: #e9edf0;
 }
+
 
