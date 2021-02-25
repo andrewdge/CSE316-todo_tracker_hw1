@@ -4,6 +4,7 @@ import ToDoList from './ToDoList.js'
 import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
+import ChangeTaskText_Transaction from './transactions/ChangeTaskText_Transaction.js'
 
 /**
  * ToDoModel
@@ -76,6 +77,11 @@ export default class ToDoModel {
         this.tps.addTransaction(transaction);
     }
 
+    changeTaskTextTransaction(itemId, newText, oldValue) {
+        let transaction = new ChangeTaskText_Transaction(this, itemId, newText, oldValue);
+        this.tps.addTransaction(transaction);
+    }
+
     /**
      * addNewList
      * 
@@ -103,7 +109,6 @@ export default class ToDoModel {
         return newItem;
     }
 
-    // edits task-col
     editTask(itemId, newText){
         let itemIndex = -1;
         for (let i = 0; (i < this.currentList.items.length) && (itemIndex < 0); i++){
@@ -268,7 +273,7 @@ export default class ToDoModel {
         this.view.viewList(this.currentList);
     }
 
-
+    // shows confirmation box on list delete
     showConfirmationBox(){
         this.view.generateConfirmationBox();
     }

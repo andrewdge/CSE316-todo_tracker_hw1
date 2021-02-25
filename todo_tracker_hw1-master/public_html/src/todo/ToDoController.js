@@ -75,8 +75,8 @@ export default class ToDoController {
         this.model.loadList(listId);
     }
 
-    handleTaskUpdate(itemId, newText) {
-        this.model.editTask(itemId, newText);
+    handleTaskUpdate(itemId, newText, oldValue) {
+        this.model.changeTaskTextTransaction(itemId, newText, oldValue);
     }
 
     handleDateUpdate(itemId, newDate) {

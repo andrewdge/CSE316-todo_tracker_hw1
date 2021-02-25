@@ -151,6 +151,7 @@ export default class ToDoView {
             itemsListDiv.appendChild(element);
             
             task.onclick = function() {
+                let oldValue = task.innerText;
                 let textInput = document.createElement("input");
                 textInput.id = "task-input";
                 textInput.size = "30";
@@ -158,7 +159,7 @@ export default class ToDoView {
                 task.parentNode.replaceChild(textInput, task);
                 textInput.focus();
                 textInput.onblur = function() {
-                    thisController.handleTaskUpdate(listItem.id, textInput.value);
+                    thisController.handleTaskUpdate(listItem.id, textInput.value, oldValue);
                 }
             }
             dueDate.onclick = function() {
