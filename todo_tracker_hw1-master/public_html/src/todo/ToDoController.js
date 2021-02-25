@@ -79,23 +79,23 @@ export default class ToDoController {
         this.model.changeTaskTextTransaction(itemId, newText, oldValue);
     }
 
-    handleDateUpdate(itemId, newDate) {
-        this.model.editDate(itemId, newDate);
+    handleDateUpdate(itemId, newDate, oldValue) {
+        this.model.changeDueDateTransaction(itemId, newDate, oldValue);
     }
 
-    handleStatusUpdate(itemId, newChoice){
-        this.model.editStatus(itemId, newChoice);
+    handleStatusUpdate(itemId, newChoice, oldValue){
+        this.model.changeStatusTransaction(itemId, newChoice, oldValue);
     }
 
     handleShift(itemId, direction){
         if (direction === "up"){
-            this.model.shiftItemUp(itemId);
+            this.model.shiftItemUpTransaction(itemId);
         } else {
-            this.model.shiftItemDown(itemId);
+            this.model.shiftItemDownTransaction(itemId);
         }
     }
 
-    handleClose(item){
-        this.model.removeItem(item);
+    handleClose(item, index){
+        this.model.deleteItemTransaction(item, index);
     }
 }

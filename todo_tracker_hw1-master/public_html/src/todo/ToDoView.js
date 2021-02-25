@@ -163,6 +163,7 @@ export default class ToDoView {
                 }
             }
             dueDate.onclick = function() {
+                let oldValue = dueDate.innerText;
                 let dateInput = document.createElement("input");
                 dateInput.id = "date-input";
                 dateInput.type = "date";
@@ -171,10 +172,11 @@ export default class ToDoView {
                 dueDate.parentElement.replaceChild(dateInput, dueDate);
                 dateInput.focus();
                 dateInput.onblur = function() {
-                    thisController.handleDateUpdate(listItem.id, dateInput.value);
+                    thisController.handleDateUpdate(listItem.id, dateInput.value, oldValue);
                 }
             }
             statusCol.onclick = function() {
+                let oldValue = statusCol.innerText;
                 let statusInput = document.createElement("select");
                 statusInput.id = "status-input";
                 let op1 = statusInput.appendChild(document.createElement("option"));
@@ -187,7 +189,7 @@ export default class ToDoView {
                 statusCol.parentNode.replaceChild(statusInput, statusCol);
                 statusInput.focus();
                 statusInput.onblur = function() {
-                    thisController.handleStatusUpdate(listItem.id, statusInput.value);
+                    thisController.handleStatusUpdate(listItem.id, statusInput.value, oldValue);
                 }
             }
             keyUpArrow.onclick = function() {
@@ -201,7 +203,7 @@ export default class ToDoView {
                 }
             }
             close.onclick = function() {
-                thisController.handleClose(listItem);
+                thisController.handleClose(listItem, i);
             }
             
         }

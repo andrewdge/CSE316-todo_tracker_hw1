@@ -5,6 +5,11 @@ import ToDoListItem from './ToDoListItem.js'
 import jsTPS from '../common/jsTPS.js'
 import AddNewItem_Transaction from './transactions/AddNewItem_Transaction.js'
 import ChangeTaskText_Transaction from './transactions/ChangeTaskText_Transaction.js'
+import ChangeDueDate_Transaction from './transactions/ChangeDueDate_Transaction.js'
+import ChangeStatus_Transaction from './transactions/ChangeStatus_Transaction.js'
+import ShiftItemUp_Transaction from './transactions/ShiftItemUp_Transaction.js'
+import ShiftItemDown_Transaction from './transactions/ShiftItemDown_Transaction.js'
+import DeleteTask_Transaction from './transactions/DeleteItem_Transaction.js'
 
 /**
  * ToDoModel
@@ -38,6 +43,11 @@ export default class ToDoModel {
      */
     addItemToCurrentList(itemToAdd) {
         this.currentList.push(itemToAdd);
+    }
+
+    addItemToCurrentListAtPosition(item, index) {
+        this.currentList.items.splice(index, 0, item);
+        this.view.viewList(this.currentList);
     }
 
     /**
@@ -81,6 +91,32 @@ export default class ToDoModel {
         let transaction = new ChangeTaskText_Transaction(this, itemId, newText, oldValue);
         this.tps.addTransaction(transaction);
     }
+
+    changeDueDateTransaction(itemId, newDate, oldValue){
+        let transaction = new ChangeDueDate_Transaction(this, itemId, newDate, oldValue);
+        this.tps.addTransaction(transaction);
+    }
+
+    changeStatusTransaction(itemId, newStatus, oldValue){
+        let transaction = new ChangeStatus_Transaction(this, itemId, newStatus, oldValue);
+        this.tps.addTransaction(transaction);
+    }
+
+    shiftItemUpTransaction(itemId){
+        let transaction = new ShiftItemUp_Transaction(this, itemId);
+        this.tps.addTransaction(transaction);
+    }
+
+    shiftItemDownTransaction(itemId){
+        let transaction = new ShiftItemDown_Transaction(this, itemId);
+        this.tps.addTransaction(transaction);
+    }
+
+    deleteItemTransaction(item, index){
+        let transaction = new DeleteTask_Transaction(this, item, index);
+        this.tps.addTransaction(transaction);
+    }
+
 
     /**
      * addNewList
@@ -235,7 +271,6 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
-        
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
