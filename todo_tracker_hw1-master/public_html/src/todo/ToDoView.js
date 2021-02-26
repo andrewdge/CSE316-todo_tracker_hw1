@@ -18,6 +18,10 @@ export default class ToDoView {
         let listElement = document.createElement("div");
         listElement.setAttribute("id", newListId);
         listElement.setAttribute("class", "todo_button");
+        listElement.style.display = "flex"
+        listElement.style.alignItems = "center";
+        listElement.style.justifyContent = "center";    
+        listElement.style.minHeight = "50px";
         listElement.appendChild(document.createTextNode(newList.name));
         listsElement.appendChild(listElement);
 

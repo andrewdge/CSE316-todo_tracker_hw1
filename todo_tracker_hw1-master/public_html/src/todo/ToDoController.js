@@ -16,17 +16,16 @@ export default class ToDoController {
         let appModel = this.model;
         let tps = appModel.tps;
         
-        let canUseListControls = false;
         let undo = document.getElementById("undo-button");
         let redo = document.getElementById("redo-button");
 
         document.onclick = function() {
-            if (tps.getUndoSize() > 0){
+            if (tps.hasTransactionToUndo()){
                 undo.classList.replace("button-disabled", "button-enabled");
             } else {
                 undo.classList.replace("button-enabled", "button-disabled");
             }
-            if (tps.getRedoSize() > 0){
+            if (tps.hasTransactionToRedo()){
                 redo.classList.replace("button-disabled", "button-enabled");
             } else {
                 redo.classList.replace("button-enabled", "button-enabled");
@@ -54,21 +53,20 @@ export default class ToDoController {
         }
         document.getElementById("todo-lists-list").onmousedown = function(eventData){
             if (eventData.button === 0) {
-                canUseListControls = true;
-                document.getElementById("close-list-button").style.color = "white";
-                document.getElementById("delete-list-button").style.color = "white";
-                document.getElementById("add-item-button").style.color = "white";
+                document.getElementById("add-item-button").classList.replace("button-disabled", "button-enabled");
+                document.getElementById("delete-list-button").classList.replace("button-disabled", "button-enabled");
+                document.getElementById("close-list-button").classList.replace("button-disabled", "button-enabled");
             }
         }
         document.getElementById("add-item-button").onmousedown = function(eventData) {
-            if (canUseListControls){
+            if (document.getElementById("add-item-button").classList.contains("button-enabled")){
                 if (eventData.button === 0){
                     appModel.addNewItemTransaction();
                 }
             }
         }
         document.getElementById("delete-list-button").onmousedown = function(eventData) {
-            if (canUseListControls){
+            if (document.getElementById("delete-list-button").classList.contains("button-enabled")) {
                 if (eventData.button === 0) {
                     appModel.showConfirmationBox();
                     document.getElementById("yesBtn").onclick = function() {
@@ -84,15 +82,16 @@ export default class ToDoController {
             }
         }
         document.getElementById("close-list-button").onmousedown = function(eventData) {
-            if (eventData.button === 0){
-                document.getElementById("close-list-button").style.color = "grey";
-                document.getElementById("delete-list-button").style.color = "grey";
-                document.getElementById("add-item-button").style.color = "grey";
-                document.getElementById("todo-lists-list").children[0].classList.remove("highlight");
-                canUseListControls = false;
-                appModel.unviewListModel();
-                
+            if (document.getElementById("close-list-button").classList.contains("button-enabled")){
+                if (eventData.button === 0){
+                    document.getElementById("add-item-button").classList.replace("button-enabled", "button-disabled");
+                    document.getElementById("delete-list-button").classList.replace("button-enabled", "button-disabled");
+                    document.getElementById("close-list-button").classList.replace("button-enabled", "button-disabled");
+                    document.getElementById("todo-lists-list").children[0].classList.remove("highlight");
+                    appModel.unviewListModel();
+                }
             }
+           
         }
     }
     

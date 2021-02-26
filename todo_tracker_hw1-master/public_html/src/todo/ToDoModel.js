@@ -212,6 +212,7 @@ export default class ToDoModel {
      * Load the items for the listId list into the UI.
      */
     loadList(listId) {
+        this.tps.clearAllTransactions();
         let listIndex = -1;
         for (let i = 0; (i < this.toDoLists.length) && (listIndex < 0); i++) {
             if (this.toDoLists[i].id === listId)
@@ -268,6 +269,7 @@ export default class ToDoModel {
         this.currentList = null;
         this.view.clearItemsList();
         this.view.refreshLists(this.toDoLists);
+        console.log("Hi");
     }
 
     // WE NEED THE VIEW TO UPDATE WHEN DATA CHANGES.
@@ -324,6 +326,6 @@ export default class ToDoModel {
      */
     unviewListModel(){
         this.currentList = null;
-        this.view.viewList(this.currentList);
+        this.view.viewList(this.currentList);    
     }
 }
