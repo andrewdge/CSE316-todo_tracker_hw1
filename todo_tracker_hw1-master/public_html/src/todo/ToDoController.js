@@ -88,10 +88,9 @@ export default class ToDoController {
                 document.getElementById("close-list-button").style.color = "grey";
                 document.getElementById("delete-list-button").style.color = "grey";
                 document.getElementById("add-item-button").style.color = "grey";
-                document.getElementById("todo-lists-list").children[0].style.backgroundColor = "#353a44";
+                document.getElementById("todo-lists-list").children[0].classList.remove("highlight");
                 canUseListControls = false;
                 appModel.unviewListModel();
-                
                 
             }
         }

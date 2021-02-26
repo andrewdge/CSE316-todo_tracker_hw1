@@ -26,7 +26,7 @@ export default class ToDoView {
         listElement.onclick = function() {
             thisController.handleLoadList(newList.id);
             thisController.canUseListControls = true;
-            listsElement.children[0].style.backgroundColor = "rgb(255, 200, 25)";
+            listsElement.children[0].classList.add("highlight");
         }
     }
 
@@ -169,7 +169,7 @@ export default class ToDoView {
                 dateInput.id = "date-input";
                 dateInput.type = "date";
                 dateInput.size = "30";
-                dateInput.value = dateInput.innerText;
+                dateInput.value = dueDate.innerText;
                 dueDate.parentElement.replaceChild(dateInput, dueDate);
                 dateInput.focus();
                 dateInput.onblur = function() {

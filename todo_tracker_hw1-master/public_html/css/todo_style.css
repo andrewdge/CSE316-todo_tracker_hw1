@@ -102,6 +102,11 @@
     color: #8ed4f8;
 }
 
+.highlight {
+    cursor: pointer;
+    background-color:#ffc819 !important;
+}
+
 .incomplete-status {
     color: #f5bc75;
 }
@@ -112,6 +117,10 @@
 
 .list-item-card {
     border-bottom: solid;
+}
+
+.list-item-card:hover {
+    background-color: #7e8084;
 }
 
 .todo_button {

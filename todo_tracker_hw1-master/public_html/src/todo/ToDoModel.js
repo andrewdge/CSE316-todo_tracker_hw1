@@ -154,7 +154,6 @@ export default class ToDoModel {
         if (itemIndex >= 0){
             this.currentList.items[itemIndex].setDescription(newText);
         }
-        this.view.refreshLists(this.toDoLists);
         this.view.viewList(this.currentList);
     }
 
@@ -167,7 +166,6 @@ export default class ToDoModel {
         if (itemIndex >= 0){
             this.currentList.items[itemIndex].setDueDate(newDate);
         }   
-        this.view.refreshLists(this.toDoLists);
         this.view.viewList(this.currentList);
     }
 
@@ -180,7 +178,6 @@ export default class ToDoModel {
         if (itemIndex >= 0){
             this.currentList.items[itemIndex].setStatus(newStatus);
         }
-        this.view.refreshLists(this.toDoLists);
         this.view.viewList(this.currentList);
     }
 
