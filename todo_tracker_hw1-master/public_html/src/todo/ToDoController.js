@@ -14,21 +14,46 @@ export default class ToDoController {
     setModel(initModel) {
         this.model = initModel;
         let appModel = this.model;
+        let tps = appModel.tps;
         
         let canUseListControls = false;
+        let undo = document.getElementById("undo-button");
+        let redo = document.getElementById("redo-button");
 
+        document.onclick = function() {
+            if (tps.getUndoSize() > 0){
+                undo.classList.replace("button-disabled", "button-enabled");
+            } else {
+                undo.classList.replace("button-enabled", "button-disabled");
+            }
+            if (tps.getRedoSize() > 0){
+                redo.classList.replace("button-disabled", "button-enabled");
+            } else {
+                redo.classList.replace("button-enabled", "button-enabled");
+            }
+        }
         // SETUP ALL THE EVENT HANDLERS SINCE THEY USE THE MODEL
-        document.getElementById("add-list-button").onclick = function() {
-            appModel.addNewList();
+        document.getElementById("add-list-button").onmousedown = function(eventData) {
+            if (eventData.button === 0){
+                appModel.addNewList();
+            }
         }
-        document.getElementById("undo-button").onclick = function() {
-            appModel.undo();
+        document.getElementById("undo-button").onmousedown = function(eventData) {
+            if (eventData.button === 0) {
+                if (undo.classList.contains("button-enabled")){
+                    appModel.undo();
+                }
+            }
         }
-        document.getElementById("redo-button").onclick = function() {
-            appModel.redo();
+        document.getElementById("redo-button").onmousedown = function(eventData) {
+            if (eventData.button === 0) {
+                if (redo.classList.contains("button-enabled")){
+                    appModel.redo();
+                }
+            }
         }
         document.getElementById("todo-lists-list").onmousedown = function(eventData){
-            if (eventData.button == 0) {
+            if (eventData.button === 0) {
                 canUseListControls = true;
                 document.getElementById("close-list-button").style.color = "white";
                 document.getElementById("delete-list-button").style.color = "white";
@@ -37,19 +62,19 @@ export default class ToDoController {
         }
         document.getElementById("add-item-button").onmousedown = function(eventData) {
             if (canUseListControls){
-                if (eventData.button == 0){
+                if (eventData.button === 0){
                     appModel.addNewItemTransaction();
                 }
             }
         }
         document.getElementById("delete-list-button").onmousedown = function(eventData) {
             if (canUseListControls){
-                if (eventData.button == 0) {
+                if (eventData.button === 0) {
                     appModel.showConfirmationBox();
                     document.getElementById("yesBtn").onclick = function() {
                         document.getElementsByClassName("modal-overlay")[0].style.display = "none";
                         appModel.removeCurrentList();
-                        document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
+                        document.getElementById("grid-container").removeChild(document.getElementsByClassName("modal-overlay")[0]);
                     }
                     noBtn.onclick = function() {
                         document.getElementsByClassName("modal-overlay")[0].style.display = "none";
@@ -59,12 +84,15 @@ export default class ToDoController {
             }
         }
         document.getElementById("close-list-button").onmousedown = function(eventData) {
-            if (eventData.button == 0){
+            if (eventData.button === 0){
                 document.getElementById("close-list-button").style.color = "grey";
                 document.getElementById("delete-list-button").style.color = "grey";
                 document.getElementById("add-item-button").style.color = "grey";
+                document.getElementById("todo-lists-list").children[0].style.backgroundColor = "#353a44";
                 canUseListControls = false;
                 appModel.unviewListModel();
+                
+                
             }
         }
     }

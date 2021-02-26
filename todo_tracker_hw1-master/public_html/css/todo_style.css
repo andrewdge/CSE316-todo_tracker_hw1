@@ -137,6 +137,11 @@
     font-size: 12pt;
 }
 
+.modal-button:hover {
+    cursor: pointer;
+    background-color: var(--swatch-foundation);
+}
+
 .modal-overlay {
     background-color: rgba(0,0,0,0.4);
 }
@@ -149,6 +154,22 @@
 
 .modal-header {
     color: #e9edf0;
+}
+
+.button-disabled {
+    color : rgb(87, 93, 105);
+    cursor: default;
+    text-align: center;
+}
+
+.button-enabled{
+    color: rgb(233,237,240);
+    cursor: pointer;
+    text-align: center;
+}
+
+.button-enabled:hover{
+    background-color: var(--swatch-complement);
 }
 
 

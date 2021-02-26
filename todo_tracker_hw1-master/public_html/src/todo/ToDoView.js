@@ -23,9 +23,10 @@ export default class ToDoView {
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
-        listElement.onmousedown = function() {
+        listElement.onclick = function() {
             thisController.handleLoadList(newList.id);
             thisController.canUseListControls = true;
+            listsElement.children[0].style.backgroundColor = "rgb(255, 200, 25)";
         }
     }
 
@@ -205,7 +206,6 @@ export default class ToDoView {
             close.onclick = function() {
                 thisController.handleClose(listItem, i);
             }
-            
         }
     }
 
