@@ -20,6 +20,9 @@ export default class ToDoController {
         let redo = document.getElementById("redo-button");
 
         document.onclick = function() {
+            console.log("undo: " + tps.hasTransactionToUndo());
+            console.log("redo: " + tps.hasTransactionToRedo());
+            console.log(tps.toString());
             if (tps.hasTransactionToUndo()){
                 undo.classList.replace("button-disabled", "button-enabled");
             } else {
@@ -28,7 +31,7 @@ export default class ToDoController {
             if (tps.hasTransactionToRedo()){
                 redo.classList.replace("button-disabled", "button-enabled");
             } else {
-                redo.classList.replace("button-enabled", "button-enabled");
+                redo.classList.replace("button-enabled", "button-disabled");
             }
         }
         // SETUP ALL THE EVENT HANDLERS SINCE THEY USE THE MODEL
