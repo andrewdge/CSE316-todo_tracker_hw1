@@ -27,11 +27,66 @@ export default class ToDoView {
 
         // SETUP THE HANDLER FOR WHEN SOMEONE MOUSE CLICKS ON OUR LIST
         let thisController = this.controller;
-        listElement.onclick = function() {
-            thisController.handleLoadList(newList.id);
-            thisController.canUseListControls = true;
-            listsElement.children[0].classList.add("highlight");
+
+        listElement.addEventListener("click", clicks);
+        var count = 0;
+        var timeout = 200;
+        function clicks() {
+            count++;
+            if (count == 1){
+                setTimeout(function(){
+                    if (count === 1){
+                        thisController.handleLoadList(newList.id);
+                        thisController.canUseListControls = true;
+                        listsElement.children[0].classList.add("highlight");
+                    } else {
+                        let oldValue = listElement.innerText;
+                        let textInput = document.createElement("input");
+                        textInput.id = "task-input";
+                        textInput.size = "30";
+                        textInput.value = listElement.innerText;
+                        textInput.style.display = "flex";
+                        textInput.style.alignItems = "center";
+                        textInput.style.justifyContent = "center";
+                        textInput.style.minHeight = "50px";
+                        listElement.parentNode.replaceChild(textInput, listElement);
+                        textInput.focus();
+                        textInput.onblur = function() {
+                            thisController.handleListRenameUpdate(newList.id, textInput.value, oldValue);
+                        }
+                    }
+                    count = 0;
+                }, timeout || 100);
+            }
         }
+
+
+
+
+        // listElement.onclick = () => {
+        //     thisController.handleLoadList(newList.id);
+        //     thisController.canUseListControls = true;
+        //     listsElement.children[0].classList.add("highlight");
+        // }
+        // listElement.ondblclick = () => {
+        //     let oldValue = listElement.innerText;
+        //     let textInput = document.createElement("input");
+        //     textInput.id = "task-input";
+        //     textInput.size = "30";
+        //     textInput.value = listElement.innerText;
+        //     textInput.style.display = "flex";
+        //     textInput.style.alignItems = "center";
+        //     textInput.style.justifyContent = "center";
+        //     textInput.style.minHeight = "50px";
+        //     listElement.parentNode.replaceChild(textInput, listElement);
+        //     textInput.focus();
+        //     textInput.onblur = function() {
+        //         thisController.handleListRenameUpdate(textInput.value, oldValue);
+        //     }
+        // }
+
+        
+
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR

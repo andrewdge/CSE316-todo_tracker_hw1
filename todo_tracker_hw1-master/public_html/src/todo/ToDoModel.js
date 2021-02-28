@@ -10,6 +10,7 @@ import ChangeStatus_Transaction from './transactions/ChangeStatus_Transaction.js
 import ShiftItemUp_Transaction from './transactions/ShiftItemUp_Transaction.js'
 import ShiftItemDown_Transaction from './transactions/ShiftItemDown_Transaction.js'
 import DeleteTask_Transaction from './transactions/DeleteItem_Transaction.js'
+import EditListName_Transaction from './transactions/EditListName_Transaction.js'
 
 /**
  * ToDoModel
@@ -102,6 +103,11 @@ export default class ToDoModel {
         this.tps.addTransaction(transaction);
     }
 
+    changeListNameTransaction(listId, newListName, oldValue) {
+        let transaction = new EditListName_Transaction(this, listId, newListName, oldValue);
+        this.tps.addTransaction(transaction);
+    }
+
     shiftItemUpTransaction(itemId){
         let transaction = new ShiftItemUp_Transaction(this, itemId);
         this.tps.addTransaction(transaction);
@@ -143,6 +149,18 @@ export default class ToDoModel {
         this.currentList.items.push(newItem);
         this.view.viewList(this.currentList);
         return newItem;
+    }
+
+    editListName(listId, newText) {
+        let listIndex = -1;
+        for (let i = 0; (i < this.toDoLists.length) && (listIndex < 0); i++){
+            if (this.toDoLists[i].id === listId)
+                listIndex = i;
+        }
+        if (listIndex >= 0){
+            this.toDoLists[listIndex].setName(newText);
+        }
+        this.view.refreshLists(this.toDoLists);
     }
 
     editTask(itemId, newText){
