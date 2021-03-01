@@ -59,34 +59,6 @@ export default class ToDoView {
                 }, timeout || 100);
             }
         }
-
-
-
-
-        // listElement.onclick = () => {
-        //     thisController.handleLoadList(newList.id);
-        //     thisController.canUseListControls = true;
-        //     listsElement.children[0].classList.add("highlight");
-        // }
-        // listElement.ondblclick = () => {
-        //     let oldValue = listElement.innerText;
-        //     let textInput = document.createElement("input");
-        //     textInput.id = "task-input";
-        //     textInput.size = "30";
-        //     textInput.value = listElement.innerText;
-        //     textInput.style.display = "flex";
-        //     textInput.style.alignItems = "center";
-        //     textInput.style.justifyContent = "center";
-        //     textInput.style.minHeight = "50px";
-        //     listElement.parentNode.replaceChild(textInput, listElement);
-        //     textInput.focus();
-        //     textInput.onblur = function() {
-        //         thisController.handleListRenameUpdate(textInput.value, oldValue);
-        //     }
-        // }
-
-        
-
     }
 
     // REMOVES ALL THE LISTS FROM THE LEFT SIDEBAR
